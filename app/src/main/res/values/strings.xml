@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Liscript</string>
+
+  <!--  edit text hints -->
+  <string name="code_text_hint">Введите код</string>
+  <string name="input_text_hint">Ввод</string>
+
+  <!--  main_menu -->
+  <string name="main_menu_eval_code">Выполнить</string>
+  <string name="main_menu_interrupt">Прервать</string>
+  <string name="main_menu_open">Открыть</string>
+  <string name="main_menu_save">Сохранить</string>
+  <string name="main_menu_save_as">Сохранить как</string>
+  <string name="main_menu_delete">Удалить</string>
+  <string name="main_menu_demo">Демо</string>
+  <string name="main_menu_settings">Настройки</string>
+
+  <!--  dialogs -->
+  <string name="dialog_title_enter_file_name">Введите имя файла</string>
+  <string name="dialog_title_select_file">Выберите файл</string>
+  <string name="dialog_title_no_saved_files">Нет сохраненных файлов</string>
+
+  <!--  settings activity-->
+  <string name="title_activity_settings">Настройки</string>
+
+  <string name="evaluator_mode_title">Тип эвалюатора</string>
+  <string name="recursive_evaluator">Рекурсивный эвалюатор</string>
+  <string name="iterative_evaluator">Итеративный эвалюатор</string>
+
+  <string name="font_size">Размер шрифта</string>
+  <string name="font_size_preference_default_value">12</string>
+
+  <string name="max_result_text_length">Размер буфера результата</string>
+  <string name="max_result_text_length_preference_default_value">10000</string>
+
+</resources>

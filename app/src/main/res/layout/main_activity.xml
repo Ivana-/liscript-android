@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.ivana.liscript.app.EditTextCode
+        android:id="@+id/codeText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:autofillHints=""
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:fontFamily="monospace"
+        android:gravity="start|top"
+        android:hint="@string/code_text_hint"
+        android:inputType="textMultiLine|textNoSuggestions|textVisiblePassword"
+        android:importantForAutofill="no"
+        android:scrollbars="vertical" />
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="?android:attr/listDivider" />
+
+    <EditText
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:autofillHints=""
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:fontFamily="monospace"
+        android:gravity="start|top"
+        android:hint="@null"
+        android:inputType="textMultiLine|textNoSuggestions|textVisiblePassword"
+        android:importantForAutofill="no"
+        android:scrollbars="vertical" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:id="@+id/inputView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@color/active_bg"
+            android:ems="10"
+            android:fontFamily="monospace"
+            android:gravity="start|top"
+            android:hint="@string/input_text_hint"
+            android:inputType="textMultiLine|textNoSuggestions|textVisiblePassword"
+            android:importantForAutofill="no"
+            android:scrollbars="vertical"
+            android:padding="@dimen/input_text_padding" />
+
+        <ImageButton
+            android:id="@+id/inputButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:contentDescription="@null"
+            android:paddingLeft="@dimen/input_button_padding"
+            android:paddingRight="@dimen/input_button_padding"
+            app:srcCompat="@android:drawable/ic_media_play" />
+    </LinearLayout>
+
+</LinearLayout>

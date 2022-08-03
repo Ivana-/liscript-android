@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AppCompatResource">
+
+    <item
+        android:id="@+id/menu_eval_code"
+        android:icon="@android:drawable/ic_media_play"
+        android:title="@string/main_menu_eval_code"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_open"
+        android:title="@string/main_menu_open"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_save"
+        android:title="@string/main_menu_save"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_save_as"
+        android:title="@string/main_menu_save_as"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_delete"
+        android:title="@string/main_menu_delete"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_demo"
+        android:title="@string/main_menu_demo"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_open_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/main_menu_settings"
+        app:showAsAction="never" />
+</menu>

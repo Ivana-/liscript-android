@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.18693009118541035" />
+        <entry key="app/src/main/res/drawable-anydpi-v24/track_icon.xml" value="0.117" />
+        <entry key="app/src/main/res/drawable-anydpi/track_icon.xml" value="0.3671794871794872" />
+        <entry key="app/src/main/res/drawable-anydpi/track_icon_1.xml" value="0.197" />
+        <entry key="app/src/main/res/drawable/ic_car.xml" value="0.117" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3671794871794872" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3671794871794872" />
+        <entry key="app/src/main/res/layout/action_bar.xml" value="0.11271529888551166" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_scrolling.xml" value="0.14628623188405798" />
+        <entry key="app/src/main/res/layout/icon_menu_item.xml" value="0.16793313069908813" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/recycler_view_frag.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.11574074074074074" />
+        <entry key="app/src/main/res/layout/spinner_dropdown_item.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/task_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/task_dialog_test.xml" value="0.11388888888888889" />
+        <entry key="app/src/main/res/layout/task_options_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/task_options_dialog_list_row.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/task_recycler_item.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/tasks_view.xml" value="0.3614583333333333" />
+        <entry key="app/src/main/res/layout/tasks_view_item.xml" value="0.37535410764872523" />
+        <entry key="app/src/main/res/layout/test.xml" value="1.25" />
+        <entry key="app/src/main/res/layout/text_row_item.xml" value="0.14628623188405798" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.22" />
+        <entry key="app/src/main/res/menu/context_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.5" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3671794871794872" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3671794871794872" />
+        <entry key="app/src/main/res/xml/preference_screen.xml" value="0.33" />
+        <entry key="app/src/main/res/xml/preferences.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.12873326467559218" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

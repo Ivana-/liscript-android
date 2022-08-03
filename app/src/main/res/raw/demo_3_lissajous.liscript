@@ -1,0 +1,56 @@
+; Фигуры Лиссажу ;
+; Задаем ширину / высоту окна и количество линий ;
+(defn lissajous (w-s n-lines)
+
+    ; макросы, которым место в стандартной библиотеке ;
+    (defmacro sin (x) (java (class "java.lang.Math") "sin" x))
+    (defmacro cos (x) (java (class "java.lang.Math") "cos" x))
+    (defmacro round (x) (java x "intValue"))
+
+    (def w-s-half (/ w-s 2))
+    (defmacro norm (x) (+ w-s-half (round (* x w-s-half)) ))
+    (defn color (r g b) (java (class 'android.graphics.Color) "rgb" r g b))
+
+    ; отрисовка ;
+    (defn draw (canvas paint delta a b phi)
+        (defmacro p-x (alpha) (norm (sin (+ (* a alpha) phi))))
+        (defmacro p-y (alpha) (norm (cos (* b alpha))))
+
+        (defn next-line (args)
+            (match args '(alpha x0 y0))
+            (def x (p-x alpha) y (p-y alpha))
+            (java canvas 'drawLine x0 (- w-s y0) x (- w-s y) paint)
+            (cons (+ alpha delta) x y))
+
+        (ntimes n-lines next-line (cons 0 (p-x 0) (p-y 0))))
+
+    ; показ окна ;
+    (defn show (delta a b phi color)
+        (def config (field (class 'android.graphics.Bitmap$Config) 'ARGB_8888))
+        (def bitmap (java (class 'android.graphics.Bitmap) 'createBitmap w-s w-s config))
+        (def canvas (java (class 'android.graphics.Canvas) 'new bitmap))
+
+        (def paint (java (class 'android.graphics.Paint) 'new))
+        (java paint 'setStyle (field (class 'android.graphics.Paint$Style) 'STROKE))
+        (java paint 'setColor color)
+        (java paint 'setStrokeWidth 1)
+        (java paint 'setAntiAlias true)
+
+        (draw canvas paint delta a b phi)
+
+        (def a (activity))
+        (def image-view (java (class 'android.widget.ImageView) 'new a))
+        (java image-view 'setImageBitmap bitmap)
+        (def adb (java (class 'android.app.AlertDialog$Builder) 'new a))
+        (java adb 'setView image-view)
+        (run-on-ui java adb 'show))
+
+    (show 2.5 1 1 0   (color 0 0 0))
+    (show 2   2 1 0   (color 255 0 0))
+    (show 2   1 2 0.3 (color 0 255 0))
+    (show 1   1 3 0.5 (color 255 0 255))
+    (show 1   3 1 0.5 (color 0 0 255))
+    (show 0.6 3 2 0.5 (color 0 255 255)) )
+
+(lissajous 320 500)
+"Фигуры Лиссажу"

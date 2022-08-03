@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="number">#ff00ff</color>
+  <color name="bool">#009696</color>
+  <color name="string">#009600</color>
+  <color name="comment">#808080</color>
+  <color name="keyword">#b1b100</color>
+  <color name="active_bg">#feffb4</color>
+</resources>

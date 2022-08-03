@@ -1,0 +1,71 @@
+; Гроздья рябины ;
+; Задаем ширину / высоту окна ;
+(defn ashberry (w-s)
+
+    ; макросы, которым место в стандартной библиотеке ;
+    (defmacro sin (x) (java (class "java.lang.Math") "sin" x))
+    (defmacro cos (x) (java (class "java.lang.Math") "cos" x))
+    (defmacro rnd () (java (class "java.lang.Math") "random"))
+    (defmacro rand (a b) (+ a (* (- b a) (rnd))))
+    (defmacro round (x) (java x "intValue"))
+
+    (def pi 3.1415926535897932384626433832)
+    (defmacro grad (x) (round (* 180 (/ x pi))))
+
+    ; цвета ;
+    (defmacro color (r g b) (java (class 'android.graphics.Color) "rgb" r g b))
+    (def BLACK (field (class 'android.graphics.Color) 'BLACK))
+    (def WHITE (field (class 'android.graphics.Color) 'WHITE))
+    (def RED (field (class 'android.graphics.Color) 'RED))
+    (def GREEN (field (class 'android.graphics.Color) 'GREEN))
+    (def YELLOW (field (class 'android.graphics.Color) 'YELLOW))
+    (def BLUE (field (class 'android.graphics.Color) 'BLUE))
+    (def BROWN (color 150 75 0))
+
+    ; параметры окна и графики ;
+    (def config (field (class 'android.graphics.Bitmap$Config) 'ARGB_8888))
+    (def bitmap (java (class 'android.graphics.Bitmap) 'createBitmap w-s w-s config))
+    (def canvas (java (class 'android.graphics.Canvas) 'new bitmap))
+
+    (def paint (java (class 'android.graphics.Paint) 'new))
+    (java paint 'setStyle (field (class 'android.graphics.Paint$Style) 'FILL_AND_STROKE))
+    (java paint 'setStrokeWidth 1)
+    (java paint 'setAntiAlias true)
+
+    ; отрисовка ;
+    (defn tree (n x y d d0 l v)
+        (def x1 (round (+ x (* l (cos d)))) y1 (round (+ y (* l (sin d)))))
+        (def kl (/ l 5))
+        (def x0 (round (- x (* kl (cos d0)))) y0 (round (- y (* kl (sin d0)))))
+        (def path (java (class "android.graphics.Path") "new"))
+        (java path 'moveTo x y)
+        (java path 'lineTo x1 y1)
+        (java path 'lineTo x0 y0)
+        (java path 'lineTo x y)
+        (java path 'close)
+        (java paint 'setColor BROWN)
+        (java canvas 'drawPath path paint)
+        (cond (> n 0)
+                 ((defmacro delta () (* v (rand (/ pi 20) (/ pi 4.5))))
+                  (tree (- n 1) x1 y1 (- d (delta)) d (/ l 1.2) (- 0 v))
+                  (tree (- n 2) x1 y1 (+ d (delta)) d (/ l 1.2) (- 0 v)))
+                 ((java paint 'setColor RED)
+                  (java canvas 'drawCircle x1 y1 10 paint)
+                  (cond (< (rnd) 0.7)
+                        ((java paint 'setColor BLACK)
+                         (java canvas 'drawCircle x1 (- y1 4) 2 paint))) )))
+
+    ; показ окна ;
+    (def w-s-half (/ w-s 2))
+
+    (tree 9 w-s-half (- w-s 20) (- 0 (/ pi 2)) 0 50 1)
+
+    (def a (activity))
+    (def image-view (java (class 'android.widget.ImageView) 'new a))
+    (java image-view 'setImageBitmap bitmap)
+    (def adb (java (class 'android.app.AlertDialog$Builder) 'new a))
+    (java adb 'setView image-view)
+    (run-on-ui java adb 'show) )
+
+(ashberry 320)
+"Гроздья рябины"

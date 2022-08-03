@@ -1,0 +1,77 @@
+; Прыгающие шарики, анимация. ;
+; Задаем ширину / высоту окна, количество и максимальный радиус шариков ;
+(defn bouncing-balls (w-width w-height n-balls r-ball-max)
+
+    ; макросы, которым место в стандартной библиотеке ;
+    (defmacro rnd () java (class "java.lang.Math") "random")
+    (defmacro round (x) java x "intValue")
+
+    ; смещает координату / скорость шарика по одной оси ;
+    (defn move-dir (ball ind-x ind-dx x-max)
+        (def x (java ball "get" ind-x)
+            dx (java ball "get" ind-dx)
+             r (java ball "get" 5)
+             x-new (+ x dx) m (- x-max r))
+        (java ball "put" ind-x  (cond (< x-new r) r (> x-new m) m x-new))
+        (java ball "put" ind-dx (cond (<= r x-new m) dx (- 0 dx))) )
+
+    ; смещает и отрисовывает шарик ;
+    (defn move-draw (ball)
+        (move-dir ball 0 1 w-width)
+        (move-dir ball 2 3 w-height)
+        (def x (java ball "get" 0)
+             y (java ball "get" 2)
+             r (java ball "get" 5))
+        (java paint 'setColor (java ball "get" 4))
+        (java canvas 'drawCircle (round x) (round y) r paint))
+
+    ; добавляет уникальный шарик со своими координатами, скоростью и цветом;
+    (defn add-new-ball ()
+        (defn rnd-dx () (def v (+ (* v-max (rnd)) 1)) (cond (< (rnd) 0.5) v (- 0 v)) )
+        (defn rnd-rgb () (round (* 200 (rnd)) ))
+        (def color (java (class 'android.graphics.Color) "rgb" (rnd-rgb) (rnd-rgb) (rnd-rgb)))
+        (def ball (java (class "java.util.HashMap") "new"))
+        (java ball "put" 0 (/ w-width 2))
+        (java ball "put" 1 (rnd-dx))
+        (java ball "put" 2 (/ w-height 2))
+        (java ball "put" 3 (rnd-dx))
+        (java ball "put" 4 color)
+        (java ball "put" 5 (+ (round (* (- r-ball-max 5) (rnd))) 5))
+        (java balls "put" (+ (java balls "size") 1) ball))
+
+    ; анимация - очистка экрана, смещение и отрисовка шариков, обновление окна, пауза ;
+    (defn go ()
+        (java canvas 'drawColor background-color)
+        (def n n-balls)
+        (while (> n 0) (move-draw (java balls "get" n)) (set! n (- n 1)))
+        (run-on-ui java image-view 'invalidate)
+        (java (class "java.lang.Thread") "sleep" 50)
+        (go))
+
+    ; параметры окна и графики ;
+
+    (def background-color (java (class 'android.graphics.Color) "rgb" 255 255 200))
+
+    (def config (field (class 'android.graphics.Bitmap$Config) 'ARGB_8888))
+    (def bitmap (java (class 'android.graphics.Bitmap) 'createBitmap w-width w-height config))
+    (def canvas (java (class 'android.graphics.Canvas) 'new bitmap))
+
+    (def paint (java (class 'android.graphics.Paint) 'new))
+    (java paint 'setStyle (field (class 'android.graphics.Paint$Style) 'FILL_AND_STROKE))
+    (java paint 'setStrokeWidth 1)
+    (java paint 'setAntiAlias true)
+
+    (def a (activity))
+    (def image-view (java (class 'android.widget.ImageView) 'new a))
+    (java image-view 'setImageBitmap bitmap)
+    (def adb (java (class 'android.app.AlertDialog$Builder) 'new a))
+    (java adb 'setView image-view)
+    (run-on-ui java adb 'show)
+
+    ; создание шариков и запуск анимации ;
+    (def balls (java (class "java.util.HashMap") "new"))
+    (def v-max 7 n n-balls)
+    (while (> n 0) (add-new-ball) (set! n (- n 1)))
+    (go))
+
+(bouncing-balls 500 400 100 30)

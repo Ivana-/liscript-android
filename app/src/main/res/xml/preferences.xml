@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="evaluator_mode_preference"
+        android:summaryOff="@string/recursive_evaluator"
+        android:summaryOn="@string/iterative_evaluator"
+        android:title="@string/evaluator_mode_title" />
+
+    <ListPreference
+        android:key="font_size_preference"
+        android:title="@string/font_size"
+        android:entries="@array/font_size_values"
+        android:entryValues="@array/font_size_values"
+        android:defaultValue="@string/font_size_preference_default_value"
+        app:useSimpleSummaryProvider="true"/>
+
+    <ListPreference
+        android:key="max_result_text_length_preference"
+        android:title="@string/max_result_text_length"
+        android:entries="@array/max_result_text_length_entries"
+        android:entryValues="@array/max_result_text_length_values"
+        android:defaultValue="@string/max_result_text_length_preference_default_value"
+        app:useSimpleSummaryProvider="true"/>
+
+</PreferenceScreen>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="input_text_padding">5dp</dimen>
+    <dimen name="input_button_padding">25dp</dimen>
+</resources>
