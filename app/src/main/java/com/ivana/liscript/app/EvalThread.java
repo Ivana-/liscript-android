@@ -7,11 +7,15 @@ import android.widget.EditText;
 
 import androidx.preference.PreferenceManager;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class EvalThread extends Thread implements Eval.InOutable {
 
     private final Object lv;
     private final boolean iter;
-    public final MainActivity activity;
+    public MainActivity activity;
+
+    private final int resultTextMaxLength;
 
     public final Object inputLock = new Object();
     public volatile String inputString = "";
@@ -26,6 +30,8 @@ public class EvalThread extends Thread implements Eval.InOutable {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(app.getApplicationContext());
         this.iter = preferences.getBoolean ("evaluator_mode_preference", false);
+        this.resultTextMaxLength = Integer.parseInt(preferences.getString("max_result_text_length_preference",
+                activity.getString(R.string.max_result_text_length_preference_default_value)));
 
         app.thread = this;
     }
@@ -34,6 +40,8 @@ public class EvalThread extends Thread implements Eval.InOutable {
     public void out(boolean ln, String s) {
         if (s == null) return;
 
+        AtomicBoolean needToLock = new AtomicBoolean(true);
+
         final Activity a = this.activity;
         if (a != null && !a.isDestroyed()) a.runOnUiThread(() -> {
             EditText resultText = a.findViewById(R.id.resultText);
@@ -41,18 +49,30 @@ public class EvalThread extends Thread implements Eval.InOutable {
             if (ln) resultText.append("\n");
 
             // limit resultText to max length
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance().getApplicationContext());
-            int maxLength = Integer.parseInt(preferences.getString("max_result_text_length_preference",
-                    activity.getString(R.string.max_result_text_length_preference_default_value)));
-            if (resultText.length() > maxLength) {
+            if (resultText.length() > resultTextMaxLength) {
                 Editable editable = resultText.getEditableText();
                 if (editable != null) {
-                    editable.delete(0, resultText.length() - maxLength);
+                    editable.delete(0, resultText.length() - resultTextMaxLength);
                 }
             }
             // move cursor to bottom
             resultText.setSelection(resultText.getText().length());
+
+            synchronized (inputLock) {
+                inputLock.notify();
+                needToLock.set(false);
+            }
         });
+
+        if (needToLock.get()) {
+            synchronized (inputLock) {
+                try {
+                    inputLock.wait();
+                } catch (InterruptedException e) {
+                    //
+                }
+            }
+        }
     }
 
     @Override

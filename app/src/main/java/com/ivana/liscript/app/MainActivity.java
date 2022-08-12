@@ -11,6 +11,7 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Log.i("LIFECYCLE", "onCreate");
         setContentView(R.layout.main_activity);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // setTitle(R.string.app_name);
         // View v = MainActivity.this.getWindow().getDecorView().getRootView();
@@ -58,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
             closeInputView();
         });
 
-        readEvalResource(R.raw.standard_library);
+        App app = App.getInstance();
+
+        if (app.thread != null) app.thread.activity = this;
+
+        if (app.env.map.isEmpty()) readEvalResource(R.raw.standard_library);
 
         // just for preventing delete on 'remove unused resources' command :)
         int i = R.raw.demo_1_liscript_basics
@@ -231,16 +237,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (R.id.menu_eval_code == itemId) {
             App app = App.getInstance();
-            if (app.thread != null) {
-                if (!app.thread.isInterrupted()) {
-                    app.thread.interruptedFlag = true;
-                    app.thread.interrupt();
-                }
-            } else {
+            if (null == app.thread) {
                 EditText codeText = findViewById(R.id.codeText);
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(codeText.getWindowToken(), 0);
                 readEvalCode(codeText.getText().toString());
+            } else { // if (null != app.thread) { // (!app.thread.isInterrupted()) {
+                app.thread.interruptedFlag = true;
+                app.thread.interrupt();
             }
 
         } else if (R.id.menu_open == itemId) {

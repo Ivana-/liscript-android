@@ -22,12 +22,16 @@
 
     <!-- max_result_text_length_preference -->
     <string-array name="max_result_text_length_entries">
+        <item>1 000</item>
+        <item>2 000</item>
         <item>5 000</item>
         <item>10 000</item>
         <item>20 000</item>
         <item>50 000</item>
     </string-array>
     <string-array name="max_result_text_length_values">
+        <item>1000</item>
+        <item>2000</item>
         <item>5000</item>
         <item>10000</item>
         <item>20000</item>

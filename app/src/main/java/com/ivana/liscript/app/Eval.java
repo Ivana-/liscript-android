@@ -842,7 +842,7 @@ public class Eval {
         int d = sl + (sl < 0 ? 0 : 1);
         //trace(d, io, inobj);
 
-        if (Thread.currentThread().isInterrupted()) {
+        if (((EvalThread) io).interruptedFlag || Thread.currentThread().isInterrupted()) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("вычисление прервано");
             //return ret(d, io, emptyList);
@@ -1488,7 +1488,7 @@ public class Eval {
                 //    cnt++;
 
                 while (true) {
-                    if (Thread.currentThread().isInterrupted()) {
+                    if (((EvalThread) io).interruptedFlag || Thread.currentThread().isInterrupted()) {
                         //if (log) writer.close();
                         //io.out(true, "max stack size = " + maxstacksize);
                         Thread.currentThread().interrupt();
